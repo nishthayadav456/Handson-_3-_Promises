@@ -1,0 +1,274 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <link rel="stylesheet" href="./style.css">
+</head>
+
+<body>
+    <p>*Promise Async Await*</p>
+    <h3>Q1.Write one example explaining how you can write a callback function.</h3>
+    <pre> function sayHello(){
+           console.log("Hello")
+         }
+         function add(num1,num2,callback){
+           console.log(num1+num2);
+           callback();
+         }
+         add(10,20,sayHello);</pre>
+    →Output-30 ,Hello<br>
+    I take a function called 'sayHello'that takes a asynchronous function as an argument and then i log to the console 'Hello' and then I define another
+    function called'add' that takes parameter 'num1' and 'num2' and callback function add function logs the sum to the console using'console.log()'
+    and then I call the function add that will add the numbers and print 'Hello'.
+
+    <hr>
+    <h3>Q2."Write a callback function to print numbers from 1 to 7, in which 1 should be printed after 1 sec, 2 should
+        be printed after 2 sec, 3 should be printed after 3 sec, and so on.
+
+        Explain callback hell.
+        Numbers
+        1
+        2
+        3
+        4
+        5
+        6
+        7"</h3>
+    <pre>
+                function login(){
+                    function searchitem(){
+                        function mobileitem(){
+                            function payment(){
+                                function dropmessage(){
+                                    console.log("thanks for shopping")
+                                }
+                            }
+                        }
+                    }
+                 }
+                 setTimeout(()=>{
+                    console.log("1")
+                     setTimeout(()=>{
+                       console.log("2")
+                        setTimeout(()=>{
+                            console.log("3")
+                           setTimeout(()=>{
+                             console.log("4")
+                               setTimeout(()=>{
+                                 console.log("5")
+                                    setTimeout(()=>{
+                                       console.log("6")
+                                           setTimeout(()=>{
+                                              console.log("7")
+                 },7000);
+                 },6000);
+                 },5000);
+                 },4000) ;         
+                 },3000);
+                 },2000);
+                 },1000);
+            </pre>
+    →Output-1,2,3,4,5,6,7 <br>
+    Callback Hell: Callback Hell is essentially nested callbacks stacked below one another forming a pyramid structure. Every callback 
+    depends/waits for the previous callback, thereby making a pyramid structure that affects the readability and maintainability of the code. 
+    Callback hell is a phenomenon that happens when multiple callbacks are nested on top of each other. 
+    <hr>
+    <h3>Q3."Write the promise function to print numbers from 1 to 7, in which 1 should be printed after 1 sec, 2 should
+        be printed after 2 sec, 3 should be printed after 3 sec, and so on.
+
+        Numbers
+        1
+        2
+        3
+        4
+        5
+        6
+        7"</h3>
+    <pre>
+        function printNumberswithDelay(){
+            let number=1;
+            function printNumber(){
+                return new Promise (resolve=>{
+                    setTimeout(()=>{
+                        console.log(number);
+                        resolve();
+                    },number*1000);
+                });
+        
+            }
+            function iterate(){
+                if(number <=7){
+                    printNumber()
+                    .then(()=>{
+                        number++;
+                        iterate();
+        
+                    });
+                }
+            }
+            iterate();
+        }
+        printNumberswithDelay();
+    </pre>
+    
+    <hr>
+    <h3>Q4."Create a promise function accepting an argument, if yes is passed to the function then it should go to
+        resolved state and print Promise Resolved, and if nothing is passed
+        then it should go to reject the state and catch the error and print Promise Rejected "</h3>
+    <pre>
+           let variable="yes"
+            function promiseFun(p){
+                  return new Promise((a,b)=>{
+                    if (p==="yes"){
+                      a('promise resolve succesfully')
+                   }
+                     else{
+                         b('promise reject')
+                       }
+                    })
+                    }
+                        promiseFun(variable)
+                        .then((item)=>console.log(item))
+                        .catch((err)=>console.log(err)); 
+                    </pre>
+    →Output-promise resolve succesfully
+    <hr>
+    <h3>Q5.Create examples to explain callback function</h3>
+    <pre>
+                        function sum(a, b) {
+                            console.log(a + b)
+                          }
+                          
+                          function Mee (num1, num2, callback) {
+                            callback(num1, num2)
+                          }
+                          
+                          Mee(6, 5, sum) 
+                    </pre>
+    →Output- 11<br>
+     The function' Mee' the third parameter is a callback function  first passing the "callback" as an argument and then calling it
+      inside the parent function operation. Here, we have taken the "sum" as the callback function, we can create any function and pass 
+      it as the callback in the 'Mee' function.<br>
+      <b>Callback Function-</b><br>
+      A callback function in javascript is a function that is passed as an argument in another function. Which is then called inside the parent 
+      function to complete a routine or an action. To put it more simply, it is a function that will be called(executed) later after its parent
+       function(the function in which it is passed as an argument) is done executing.
+
+    <hr>
+    <h3>Q6.Create examples to explain callback hell function.</h3>
+    <pre>
+        setTimeout(() => {
+            console.log('1')
+            setTimeout(() => {
+              console.log('2')
+              setTimeout(() => {
+                console.log('3')
+                setTimeout(() => {
+                  console.log('4')
+                  setTimeout(() => {
+                    console.log('5')                       
+                    setTimeout(() => {
+                      console.log('6')
+                      setTimeout(() => {
+                        console.log('7')
+                        
+                      }, 7000);
+                    }, 6000);
+                  }, 5000);
+                }, 4000);
+              }, 3000);
+            }, 2000);
+          }, 1000);
+    </pre>
+    →Output -1,2,3,4,5,6,7<br>
+    Callback Hell: Callback Hell is essentially nested callbacks stacked below one another forming a pyramid structure. 
+    Every callback depends/waits for the previous callback, thereby making a pyramid structure that affects the readability and 
+    maintainability of the code. Callback hell is a phenomenon that happens when multiple callbacks are nested on top of each other.<br>
+    Here, I print the number 1 to 7 after a seconds using setTimeout function like 1 will print after 1 second then 2 will print after 2 second and soo on
+    and then i log to the console. 
+
+    <hr>
+    <h3>Q7.Create examples to explain promises function.</h3>
+    <pre>
+    const myPromise = new Promise((resolve, reject) => {
+        
+           setTimeout(() => {
+           resolve("Promise resolved!");
+          }, 2000);
+         });
+         myPromise
+          .then((result) => {
+            console.log(result);
+         }).catch((error) => {
+            console.log(error);
+        });
+</pre>
+    →Output-Promise resolved!<br>
+    A function 'mypromise' return a promise that resolved after a delay. The promises are chained using chained using '.then()'.After the first task 
+    is completed the second task is executed if any task throws an error,it is caught using'catch()'<br>
+    A promise is a good way to handle asynchronous operations. It is used to find out if the asynchronous operation is successfully completed 
+    or not.<br>
+
+A promise may have one of three states.<br>
+
+1-Pending<br>
+2-Fulfilled<br>
+3-Rejected<br>
+A promise starts in a pending state. That means the process is not complete. If the operation is successful, the process ends in a fulfilled 
+state. And, if an error occurs, the process ends in a rejected state.<br>
+    <b>Then()</b>method is used to handle the resolved valued.<br>
+    <b>catch()</b>method is used to handle any errors.
+    <hr>
+    <h3>Q8.Create examples to explain async await function.</h3>
+    <pre>
+    const getData = async() => {
+        let y = await "Hello World";
+        console.log(y);
+    }
+     
+    console.log(1);
+    getData();
+    console.log(2);
+</pre>
+    →Output-1 ,2 , "Hello World"<br>
+    Await function is used to wait for the promise. It could be used within the async block only. It makes the code wait until the promise returns a result. 
+    It only makes the async block wait.The console prints 2 before the “Hello World”. This is due to the usage of the await keyword. 
+    <hr>
+    <h3>Q9.Create examples to explain promise.all function</h3>
+    <pre>
+        const promises = [
+        new Promise((resolve) =>
+          setTimeout(() => 
+            resolve("Promise 1 resolved!"), 
+                     2000)),
+        new Promise((resolve) => 
+          setTimeout(() =>
+            resolve("Promise 2 resolved!"), 
+                     1000)),
+        new Promise((resolve) =>
+          setTimeout(() =>
+            resolve("Promise 3 resolved!"),
+                     1500))
+      ];
+         Promise.all(promises)
+        .then((results) => {
+          console.log(results);
+        })
+        .catch((error) => {
+          console.log(error);
+        });
+</pre>
+    →Output-['Promise 1 resolved!', 'Promise 2 resolved!', 'Promise 3 resolved!']<br>
+    We use the Promise.all function to handle all the promises in the array simultaneously. The Promise.all function takes an array of promises
+     and returns a new promise that resolves when all the promises in the array have resolved. we receive an array of the resolved values from 
+     each promise. In this case, after all the promises are resolved, the results array contains the values ["Promise 1 resolved!", "Promise 2 resolved!", "Promise 3 resolved!"],
+      which we log to the console.
+ 
+    <script src="./index.js"></script>
+</body>
+
+</html>
